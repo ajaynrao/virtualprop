@@ -57,7 +57,7 @@ function on_scroll_pause_script(){
         
         $( '.featured-video-plus iframe' ).each(function( video ) {
             var srcVideo = $(this).attr("src");
-			if(document.getElementsByClassName("main-search-div")[0])
+			if(document.querySelector(".listing-wrap.listing-v1") != null)
 			{
 			$(this).attr('src', $(this).attr('src') +'&playsinline=1&controls=1&rel=0&autohide=1&modestbranding=1&showinfo=0&loop=1&mute=1');
 			}
@@ -68,7 +68,7 @@ function on_scroll_pause_script(){
 		// $('#pills-tabContent iframe)[0].contentWindow.postMessage('{"event":"command","func":"' + 'playVideo' + '","args":""}', '*');
     });
 		var players = [];
-			if(document.querySelector(".main-search-div") != null)
+			if(document.querySelector(".listing-wrap.listing-v1") != null)
 			{
 			  var videos = document.querySelectorAll(".featured-video-plus iframe");
               for(var i = 0; i < videos.length; i++) {
@@ -85,7 +85,7 @@ function on_scroll_pause_script(){
 			}
 			if(document.querySelector(".single-property") != null)
 			{
-			  var videos = document.querySelectorAll(".featured-video-plus iframe");
+			  var videos = document.querySelectorAll(".listing-slider .featured-video-plus iframe");
               for(var i = 0; i < videos.length; i++) {
                 var video = videos[i];
 				video.setAttribute('id', 'fitvid'+i);
@@ -115,7 +115,7 @@ function on_scroll_pause_script(){
 			if(document.querySelector('div[id="pills-gallery"]')) {
 				$('#pills-tabContent iframe')[0].contentWindow.postMessage('{"event":"command","func":"' + 'playVideo' + '","args":""}', '*');
 			}
-			if(document.querySelector(".main-search-div") != null)
+			if(document.querySelector(".listing-wrap.listing-v1") != null)
 			{
               var fraction = 0.8;
               var videos = document.querySelectorAll(".featured-video-plus iframe");
@@ -128,8 +128,8 @@ function on_scroll_pause_script(){
 			    var offTop = yPosition+innerHeight;
 				var wheight = $(window).height();
                 if ((offTop > 0) && (offTop < wheight)) {
-					if(document.querySelector('.main-search-div')!=null) {
-						var url = $('.main-search-div #fitvid'+i).attr('src');
+					if(document.querySelector('.listing-wrap.listing-v1')!=null) {
+						var url = $('.listing-wrap.listing-v1 #fitvid'+i).attr('src');
 						if(url.includes('vimeo')) {
 							  $('#fitvid'+i).addClass("vimeo");
 							  var vimeo = $('iframe.vimeo');
@@ -143,15 +143,15 @@ function on_scroll_pause_script(){
 							 
 						}
 						else {
-							$('.main-search-div #fitvid'+i)[0].contentWindow.postMessage('{"event":"command","func":"' + 'playVideo' + '","args":""}', '*');
+							$('.listing-wrap.listing-v1 #fitvid'+i)[0].contentWindow.postMessage('{"event":"command","func":"' + 'playVideo' + '","args":""}', '*');
 						}
 						
 						
 					}
                        
                 } else {
-					if(document.querySelector('.main-search-div') != null) {
-						var url = $('.main-search-div #fitvid'+i).attr('src');
+					if(document.querySelector('.listing-wrap.listing-v1') != null) {
+						var url = $('.listing-wrap.listing-v1 #fitvid'+i).attr('src');
 						if(url.includes('vimeo')) {
 							  $('#fitvid'+i).addClass("vimeo");
 							  var vimeo = $('iframe.vimeo');
@@ -163,7 +163,7 @@ function on_scroll_pause_script(){
 							  })
 						}
 						else {
-							$('.main-search-div #fitvid'+i)[0].contentWindow.postMessage('{"event":"command","func":"' + 'pauseVideo' + '","args":""}', '*');
+							$('.listing-wrap.listing-v1 #fitvid'+i)[0].contentWindow.postMessage('{"event":"command","func":"' + 'pauseVideo' + '","args":""}', '*');
 						}
 						
 					}
@@ -175,7 +175,7 @@ function on_scroll_pause_script(){
 
 		if(document.querySelector(".bt-content-wrap") != null)
 			{
-			  var videos = document.querySelectorAll(".featured-video-plus iframe")
+			  var videos = document.querySelectorAll(".listing-slider .featured-video-plus iframe")
               var fraction = 0.8;
 
               for(var i = 0; i < videos.length; i++) {
