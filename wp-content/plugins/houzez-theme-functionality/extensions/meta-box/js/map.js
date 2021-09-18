@@ -50,17 +50,18 @@
               this.map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
 			  this.marker = new google.maps.Marker( {position: latLng, map: this.map, draggable: true} );
 	    //event listener for custom button
-		function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+		function handleLocationError(browserHasGeolocation, infoWindow, pos, map) {
 		  infoWindow.setPosition(pos);
 		  infoWindow.setContent(
 			browserHasGeolocation
 			  ? "Error: The Geolocation service failed."
 			  : "Error: Your browser doesn't support geolocation."
 		  );
-		  infoWindow.open(this.map);
+		  infoWindow.open(map);
 		}
 				locationButton.addEventListener("click", () => {
 				// Try HTML5 geolocation.
+				console.log(navigator.geolocation);
 				if (navigator.geolocation) {
 				  navigator.geolocation.getCurrentPosition(
 					(position) => {
@@ -68,6 +69,9 @@
 						lat: position.coords.latitude,
 						lng: position.coords.longitude,
 					  };
+					  if (this.marker != null) {
+						this.marker.setMap(null);
+					  }
 					  this.marker = new google.maps.Marker( {position: pos, map: this.map, draggable: true} );
 // 					  infoWindow.setPosition(pos);
 // 					  infoWindow.setContent(pos.lat+", "+pos.lng);
@@ -75,12 +79,12 @@
 					  this.map.setCenter(pos);
 					},
 					() => {
-					  handleLocationError(true, infoWindow, this.map.getCenter());
+					  handleLocationError(true, infoWindow, this.map.getCenter(), this.map);
 					}
 				  );
 				} else {
 				  // Browser doesn't support Geolocation
-				  handleLocationError(false, infoWindow, map.getCenter());
+				  handleLocationError(false, infoWindow, map.getCenter(), this.map);
 				}
 			  });
 		},
