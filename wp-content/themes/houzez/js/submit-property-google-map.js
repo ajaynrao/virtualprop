@@ -53,6 +53,8 @@ jQuery(document).ready(function ($) {
             streetViewControl: 0,
             mapTypeId: window.google.maps.MapTypeId.ROADMAP
         });
+        document.getElementById('latitude').value = maplat;
+        document.getElementById('longitude').value = maplong;
         const infoWindow = new google.maps.InfoWindow();
         const locationButton = document.createElement("button");
         var att = document.createAttribute("type");       // Create a "type" attribute
@@ -82,13 +84,14 @@ jQuery(document).ready(function ($) {
                             lat: position.coords.latitude,
                             lng: position.coords.longitude,
                         };
+                        document.getElementById('latitude').value = parseFloat(position.coords.latitude);
+                        document.getElementById('longitude').value = parseFloat(position.coords.longitude);
+                        maplat = parseFloat(position.coords.latitude);
+                        maplong = parseFloat(position.coords.longitude);
                         if (marker != null) {
                             marker.setMap(null);
                         }
                         marker = new google.maps.Marker({ position: pos, map: map, draggable: true });
-                        // 					  infoWindow.setPosition(pos);
-                        // 					  infoWindow.setContent(pos.lat+", "+pos.lng);
-                        // 					  infoWindow.open(map);
                         map.setCenter(pos);
                     },
                     () => {
